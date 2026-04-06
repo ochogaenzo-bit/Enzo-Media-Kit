@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzo Ochoga | Founder, Speaker, Host</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent-bg: #f5f5f7;
+            --dark-bg: #111111;
+            --dark-text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Inter", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1rem; }
+        h2 { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        p { font-size: 1.125rem; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 600px; }
+        
+        .lead { font-size: 1.5rem; color: var(--text-main); font-weight: 400; }
+
+        /* LAYOUT & CONTAINERS */
+        .container, .container-wide {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 5%;
+        }
+
+        .container-wide {
+            max-width: 1400px;
+        }
+
+        .section-light { background-color: var(--bg-color); }
+        .section-gray { background-color: var(--accent-bg); }
+        .section-dark { background-color: var(--dark-bg); color: var(--dark-text); }
+        .section-dark p { color: #aaaaaa; }
+
+        /* HEADER, LOGO & NAVIGATION */
+        .header {
+            padding: 30px 5%;
+            background-color: #000000;
+            color: #ffffff;
+            border-bottom: 1px solid #333333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        #site-logo {
+            max-width: 350px;
+            max-height: 140px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 20px;
+            border: 1px solid #444444;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: calc(90vh - 180px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 5vh;
+        }
+
+        .hero h1 { margin-bottom: 0.5rem; }
+
+        .hero p.subhead {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-top: 1rem;
+        }
+
+        .hero-photo-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        #hero-photo {
+            max-width: 500px;
+            max-height: none;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        /* SPLIT LAYOUT */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .split.reverse .text-content { order: 2; }
+        .split.reverse .image-content { order: 1; }
+
+        .quote {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--text-main);
+            line-height: 1.3;
+            margin-top: 3rem;
+            border-left: 4px solid var(--text-main);
+            padding-left: 2rem;
+        }
+
+        /* 3-COLUMN GRID */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .card h3 { 
+            font-size: 1.25rem; 
+            border-bottom: 1px solid #eaeaea; 
+            padding-bottom: 1rem; 
+            margin-bottom: 1rem;
+        }
+
+        /* VISUAL PROOF GRID (Top 3) */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 4rem;
+        }
+        
+        /* BOTTOM PROOF ROW (Bottom 2) */
+        .bottom-image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .img-ph {
+            background-color: var(--accent-bg);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.8rem;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .img-ph img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* BOOK COLLAGE */
+        .book-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .book-collage-main {
+            grid-column: span 2;
+        }
+
+        .book-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        /* PODCAST COLLAGE (1 on top, 2 on bottom) */
+        .podcast-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .podcast-collage-main {
+            grid-column: span 2;
+            justify-self: center;
+            width: calc(50% - 1rem); 
+        }
+
+        .collage-img {
+            width: 100%;
+            aspect-ratio: 1 / 1; 
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        /* BUTTONS & LINKS */
+        a.btn {
+            display: inline-block;
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .section-dark a.btn {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        a.btn:hover { opacity: 0.8; }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 100px 5%;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .split { grid-template-columns: 1fr; gap: 2rem; }
+            .split.reverse .text-content { order: 1; }
+            .split.reverse .image-content { order: 2; }
+            .quote { font-size: 1.5rem; padding-left: 1rem; }
+            .image-grid, .bottom-image-row { grid-template-columns: 1fr; }
+            #site-logo { max-width: 250px; }
+            #hero-photo { max-width: 100%; max-height: 400px;}
+            .nav-links { gap: 10px; }
+            .nav-btn { font-size: 0.75rem; padding: 8px 12px; }
+            
+            .podcast-collage { 
+                grid-template-columns: 1fr; 
+                max-width: 400px;
+            }
+            .podcast-collage-main { 
+                grid-column: span 1; 
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <img src="doerslablogo.png" id="site-logo" alt="The Doer's Lab Logo">
+        <nav class="nav-links">
+            <a href="#about" class="nav-btn">About</a>
+            <a href="#book" class="nav-btn">Built From The Fall</a>
+            <a href="#podcast" class="nav-btn">The Doer's Lab</a>
+        </nav>
+    </header>
+
+    <section class="section-light">
+        <div class="container hero">
+            <h1>Becoming who you are meant to be takes work, rising through pressure, and facing opposition.</h1>
+            <p class="subhead">...And you don't have to do it alone.</p>
+            <div class="hero-photo-wrapper">
+                <img src="IMG_20250731_111546114.jpg" id="hero-photo" alt="Photo of Enzo Ochoga">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-light" id="about">
+        <div class="container split">
+            <div class="text-content">
+                <h2>The quiet work of becoming.</h2>
+                <p class="lead">Enzo Ochoga is an author, entrepreneur, and speaker building at the intersection of human potential and practical change.</p>
+                <p>With a background spanning industrial and organizational psychology, education, healthcare management, and technology, she brings a calm authority and a touch of humor to every room she enters. Her work is rooted in real growth: the kind that happens when we face pressure, pivot, and choose to rise anyway.</p>
+            </div>
+            <div class="text-content quote-container">
+                <blockquote class="quote">
+                    "I believe we can learn a few things from people very different from us, and I really want to share that truth."
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-gray" id="builds">
+        <div class="container">
+            <h2>What She Builds</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>HerWai</h3>
+                    <p>A community social network platform rooted in healthcare, arts, and business, designed to help people grow through what they go through.</p>
+                </div>
+                <div class="card">
+                    <h3>The Doer's Lab</h3>
+                    <p>A podcast and community where honest conversations fuel leadership and education, centered on leadership, pressure, and resilience.</p>
+                </div>
+                <div class="card">
+                    <h3>Strategy & Speaking</h3>
+                    <p>Equipping people to move forward with courage and consistency through teaching, strategy, and community-building.</p>
+                </div>
+            </div>
+            
+            <div class="image-grid">
+                <div class="img-ph"><img src="SDR_9200.jpg" alt="Baltimore Women's Health Forum Speaking Engagement"></div>
+                <div class="img-ph"><img src="Podcast Cover ideas (2).png" alt="Doer's Lab Podcast Cover Image"></div>
+                <div class="img-ph"><img src="50250305215316175_save.jpg" alt="Baltimore Women's Health Forum 2026 Presentation"></div>
+            </div>
+            
+            <div class="bottom-image-row">
+                <div class="img-ph"><img src="DSCF6576.jpg" alt="Speaking Engagement presentation"></div>
+                <div class="img-ph"><img src="1000006582.jpg" alt="Enzo Ochoga Presentation"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-light" id="book">
+        <div class="container split reverse">
+            <div class="text-content">
+                <h2>Built From The Fall</h2>
+                <p class="lead">A real-world guide to resilience, reinvention, and the strength you already have.</p>
+                <p>An exploration of navigating pivots and rising through opposition. Written for those in the messy middle of their journey.</p>
+                <a href="#" class="btn">Get the Book</a>
+            </div>
+            <div class="image-content">
+                <div class="book-collage">
+                    <img src="Untitled design (14).png" class="book-img" alt="Built From The Fall Book Cover">
+                    <img src="Testing Book mockup.png" class="book-img" alt="Woman holding Built From The Fall book">
+                    <img src="Testing Book Mockup (2).png" class="book-img book-collage-main" alt="Man reading Built From The Fall book">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-dark" id="podcast">
+        <div class="container split">
+            <div class="text-content">
+                <h2>The Doer's Lab</h2>
+                <p class="lead">For builders and leaders navigating life's messy middle.</p>
+                <p>Hosted by Enzo Ochoga, each episode dives into resilience, leadership, pressure, and the quiet work of becoming. It brings you deep human conversations that challenge and inspire, featuring experts like Dr. David Smith, Dr. Bijal Patel, and Attorney Lee.</p>
+                <p style="color: #ffffff; font-weight: bold; margin-top: 2rem;">New episodes & seasons in front of a live studio audience coming August 2026.</p>
+            </div>
+            <div class="image-content">
+                <div class="podcast-collage">
+                    <img src="Black Modern Talk Podcast Cover (2).png" class="collage-img podcast-collage-main" alt="The Doer's Lab Podcast Cover">
+                    <img src="Enzo_and_Patel_1_optimized.png" class="collage-img" alt="Enzo Ochoga and Guest Dr. Patel">
+                    <img src="Podcast_with_David_optimized.png" class="collage-img" alt="Enzo Ochoga and Guest Dr. David Smith">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section-light">
+        <div class="container">
+            <h2>Let's Build Together.</h2>
+            <a href="https://www.linkedin.com/in/enzo-ochoga" class="btn" target="_blank">Connect on LinkedIn</a>
+        </div>
+    </footer>
+
+</body>
+</html>
